@@ -17,6 +17,6 @@
 </p>
 
 <p align="center">
-  <img src="./EasyJoin.png" alt="EasyJoin Gorilla Tag Mod Preview" width="500">
+  <img src="./I%20Hate%20Ghosts%20Showcase.png" alt="I Hate Ghosts Gorilla Tag Mod Preview" width="500">
 </p>
 

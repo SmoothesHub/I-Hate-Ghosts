@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>I Hate Ghosts</AssemblyName>
+    <RootNamespace>IHateGhosts</RootNamespace>
+    <Version>1.0.0</Version>
+    <Product>I Hate Ghosts</Product>
+    <Description>Removes the Halloween Lurker Ghost's local appearance, sounds, and possession effects.</Description>
+    <Authors>IHateGhosts</Authors>
+    <Company>IHateGhosts</Company>
+    <Deterministic>true</Deterministic>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <PathMap>$(MSBuildProjectDirectory)=/src/IHateGhosts</PathMap>
+    <GamePath Condition="'$(GamePath)' == ''">$(GORILLA_TAG_PATH)</GamePath>
+    <GameManaged>$(GamePath)\Gorilla Tag_Data\Managed</GameManaged>
+    <BepInExCore>$(GamePath)\BepInEx\core</BepInExCore>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Plugin.cs" />
+    <Reference Include="BepInEx"><HintPath>$(BepInExCore)\BepInEx.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>$(BepInExCore)\0Harmony.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Assembly-CSharp"><HintPath>$(GameManaged)\Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine"><HintPath>$(GameManaged)\UnityEngine.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(GameManaged)\UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.AudioModule"><HintPath>$(GameManaged)\UnityEngine.AudioModule.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+  <Target Name="CheckGamePath" BeforeTargets="ResolveReferences">
+    <Error Condition="!Exists('$(GameManaged)\Assembly-CSharp.dll')" Text="Set GamePath or GORILLA_TAG_PATH to your Gorilla Tag installation folder." />
+    <Error Condition="!Exists('$(BepInExCore)\BepInEx.dll') Or !Exists('$(BepInExCore)\0Harmony.dll')" Text="BepInEx 5 and its bundled Harmony DLL must be installed in the game folder." />
+  </Target>
+</Project>
